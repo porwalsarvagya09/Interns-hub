@@ -5,10 +5,12 @@ import dotenv from "dotenv";
 import cors from "cors";
 import applicantRoutes from "./routes/applicants.js";
 
+
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+
 
 app.use(cors({
   origin: process.env.CORS_ORIGIN || "*"
