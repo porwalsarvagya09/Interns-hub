@@ -47,8 +47,11 @@ project/
 ## ⚙️ Environment Variables
 ### Backend env
 PORT=5000
+---
 MONGODB_URI=your-mongodb-connection-string
+---
 FRONTEND_URL=https://your-frontend-url.deploy.com
+---
 
 ### Frontend env
 VITE_API_URL=https://your-backend-url.deploy.com
@@ -56,11 +59,13 @@ VITE_API_URL=https://your-backend-url.deploy.com
 ---
 ## Clone the repo
 -git clone https://github.com/your-username/project.git
+---
 -cd project
 
 ## Install dependencies for frontend & backend
 
 -cd client && npm install
+--
 -cd ../server && npm install
 
 ## Start backend
