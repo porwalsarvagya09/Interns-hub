@@ -4,18 +4,23 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import applicantRoutes from "./routes/applicants.js";
+import path from "path"
+
 
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+const __dirname = path.resolve()
 
+if (process.env.NODE_ENV !== "production") {
 const allowedOrigins = [process.env.CORS_ORIGIN]
 app.use(cors({
   origin: allowedOrigins,
   credentials: true
 }));
+}
 
 // Connect to MongoDB
 const MONGO = process.env.MONGODB_URI;
@@ -29,6 +34,14 @@ mongoose.connect(MONGO)
 
 // Use routes
 app.use("/api/applicants", applicantRoutes);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../client/dist")));
+
+  app.get("/*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client", "dist", "index.html"));
+  });
+}
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(`Server listening on port ${port}`));
